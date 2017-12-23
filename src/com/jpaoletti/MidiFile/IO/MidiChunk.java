@@ -23,7 +23,7 @@ public abstract class MidiChunk {
      * @throws IllegalArgumentException if type.length != TYPE_LENGTH or type is null
      * @param type chunk type
      */
-    protected MidiChunk(byte[] type) throws IllegalArgumentException {
+    protected MidiChunk(byte[] type) {
         //todo MidiChunk(byte[] type)
     }
 
@@ -35,7 +35,7 @@ public abstract class MidiChunk {
      * @param type chunk type
      * @throws IllegalArgumentException if type.length != TYPE_LENGTH or type is null
      */
-    protected final void setType(byte[] type) throws IllegalArgumentException {
+    protected final void setType(byte[] type) {
         //todo setType(byte[] type)
 
     }
@@ -54,7 +54,7 @@ public abstract class MidiChunk {
      * @param length the number of bytes.
      * @throws IllegalArgumentException if bytes < 0 || bytes > (2^32)-1
      */
-    protected final void setDataLength(long length) throws IllegalArgumentException {
+    protected final void setDataLength(long length) {
         //todo setDataLength(long length)
     }
 

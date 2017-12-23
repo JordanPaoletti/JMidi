@@ -81,8 +81,7 @@ public class TrackChunk extends MidiChunk{
      * @param numEvents number events to remove
      * @throws NoSuchElementException if numEvents > events.size()
      */
-    public void removeEvents(int numEvents)
-            throws NoSuchElementException {
+    public void removeEvents(int numEvents) {
         //todo removeEvents(int numEvents)
     }
 
