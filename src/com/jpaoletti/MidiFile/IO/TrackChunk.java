@@ -1,6 +1,5 @@
-package com.jpaoletti.MidiFile;
+package com.jpaoletti.MidiFile.IO;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.NoSuchElementException;
 

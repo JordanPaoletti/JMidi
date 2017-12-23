@@ -1,4 +1,4 @@
-package com.jpaoletti.MidiFile;
+package com.jpaoletti.MidiFile.IO;
 
 public class SysexEvent {
     //todo
