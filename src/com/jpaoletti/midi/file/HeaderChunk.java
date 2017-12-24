@@ -1,6 +1,7 @@
-package com.jpaoletti.MidiFile.IO;
+package com.jpaoletti.midi.file;
 
-public class HeaderChunk extends MidiChunk{
+
+public class HeaderChunk extends MidiChunk {
 
     /*
     Class Constants

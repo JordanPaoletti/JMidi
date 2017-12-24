@@ -1,10 +1,12 @@
-package com.jpaoletti.MidiFile.IO;
+package com.jpaoletti.midi.events;
+
+import com.jpaoletti.midi.file.MidiVLQ;
 
 public abstract class MidiTrackEvent {
     /*
     Instance Variables
      */
-    protected MidiVLQ deltaTime;
+    protected com.jpaoletti.midi.file.MidiVLQ deltaTime;
 
     /*
     Constructors
@@ -14,7 +16,7 @@ public abstract class MidiTrackEvent {
      * Instantiates the deltaTime of an event
      * @param deltaTime
      */
-    protected MidiTrackEvent(MidiVLQ deltaTime) {
+    protected MidiTrackEvent(com.jpaoletti.midi.file.MidiVLQ deltaTime) {
         this.deltaTime = deltaTime;
     }
 
@@ -25,7 +27,7 @@ public abstract class MidiTrackEvent {
     /**
      * @return delta time of the event
      */
-    public final MidiVLQ getDeltaTime() {
+    public final com.jpaoletti.midi.file.MidiVLQ getDeltaTime() {
         //todo getDeltaTime()
         return null;
     }

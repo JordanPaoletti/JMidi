@@ -1,4 +1,4 @@
-package com.jpaoletti.MidiFile.IO;
+package com.jpaoletti.midi.file;
 
 import java.util.Arrays;
 

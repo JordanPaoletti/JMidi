@@ -1,9 +1,11 @@
-package com.jpaoletti.MidiFile.IO;
+package com.jpaoletti.midi.file;
+
+import com.jpaoletti.midi.events.MidiEvent;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class TrackChunk extends MidiChunk{
+public class TrackChunk extends MidiChunk {
     /*
     Class Constants
      */

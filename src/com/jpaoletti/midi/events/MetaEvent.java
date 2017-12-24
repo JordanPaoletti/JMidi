@@ -1,4 +1,4 @@
-package com.jpaoletti.MidiFile.IO;
+package com.jpaoletti.midi.events;
 
 public class MetaEvent {
     //todo
