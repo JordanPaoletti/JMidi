@@ -6,7 +6,7 @@ public abstract class MidiTrackEvent {
     /*
     Instance Variables
      */
-    protected com.jpaoletti.midi.file.MidiVLQ deltaTime;
+    protected MidiVLQ deltaTime;
 
     /*
     Constructors
