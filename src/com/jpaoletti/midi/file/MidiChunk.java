@@ -1,11 +1,15 @@
 package com.jpaoletti.midi.file;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.Arrays;
 
 public abstract class MidiChunk {
     /*
     Class Constants
      */
+    public static final long MAX_DATA_LENGTH = 0xffffffffL; //max 32 bit unsigned value
     public static final byte TYPE_LENGTH = 4; //number of bytes the type uses
     public static final byte DATALENGTH_LENGTH = 4; //number of bytes taken by the datalength value
 
@@ -24,7 +28,7 @@ public abstract class MidiChunk {
      * @param type chunk type
      */
     protected MidiChunk(byte[] type) {
-        //todo MidiChunk(byte[] type)
+        setType(type);
     }
 
     /*
@@ -36,16 +40,17 @@ public abstract class MidiChunk {
      * @throws IllegalArgumentException if type.length != TYPE_LENGTH or type is null
      */
     protected final void setType(byte[] type) {
-        //todo setType(byte[] type)
+        if (type.length != TYPE_LENGTH)
+            throw new IllegalArgumentException("MidiChunk type must be a 4 byte ascii encoded array");
 
+        this.type = Arrays.copyOf(type, TYPE_LENGTH);
     }
 
     /**
      * @return a byte[] of length TYPE_LENGTH that represents the chunk type
      */
     public final byte[] getType() {
-        //todo getType()
-        return null;
+        return Arrays.copyOf(type, TYPE_LENGTH);
     }
 
     /**
@@ -55,7 +60,9 @@ public abstract class MidiChunk {
      * @throws IllegalArgumentException if bytes < 0 || bytes > (2^32)-1
      */
     protected final void setDataLength(long length) {
-        //todo setDataLength(long length)
+        if (length < 0 || length > MAX_DATA_LENGTH)
+            throw new IllegalArgumentException("Data length must fit within a 32 bit unsigned integer range");
+        dataLength = length;
     }
 
     /**
@@ -63,8 +70,7 @@ public abstract class MidiChunk {
      * @return the amount of bytes
      */
     public final long getDataLength() {
-        //todo getDataLength()
-        return 0;
+        return dataLength;
     }
 
     /**
@@ -84,7 +90,16 @@ public abstract class MidiChunk {
      * @return the byte[] representing the chunk
      */
     public final byte[] getBytes() {
-        //todo getBytes()
+        ByteArrayOutputStream out = new ByteArrayOutputStream((int)getBytesLength());
+        try {
+            out.write(type);
+            out.write(longToUnsignedInt32Bytes(dataLength));
+            out.write(getDataBytes());
+        }
+        catch (IOException e) {
+            //this should never occur
+            e.printStackTrace();
+        }
         return null;
     }
 
@@ -93,7 +108,22 @@ public abstract class MidiChunk {
      * @return the number of bytes
      */
     public final long getBytesLength() {
-        return 0;
+        return dataLength + DATALENGTH_LENGTH + TYPE_LENGTH;
+    }
+
+    /**
+     * Converts the data held in a long primitive to a byte array representing a 32 bit unsigned int
+     * Uses raw binary data, doesn't convert from two's complement if num is a negative value
+     * @param num long to convert
+     * @return bytes of the equivalent 32 bit unsigned int
+     */
+    private byte[] longToUnsignedInt32Bytes(long num) {
+        byte[] retval = new byte[4];
+        retval[3] = (byte) (num & 0xFF);
+        retval[3] = (byte) ((num & 0xFF) >>> 8);
+        retval[3] = (byte) ((num & 0xFF) >>> 16);
+        retval[3] = (byte) ((num & 0xFF) >>> 24);
+        return retval;
     }
 
 }
